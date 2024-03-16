@@ -1,3 +1,6 @@
+using Domain;
+using Microsoft.EntityFrameworkCore;
+
 namespace UrlShortener
 {
     public class Program
@@ -5,6 +8,9 @@ namespace UrlShortener
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            var localDbConnectionString = builder.Configuration.GetConnectionString("UrlShortenerContext");
+            builder.Services.AddDbContext<UrlShortenerContext>(options => options.UseSqlServer(localDbConnectionString));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -17,6 +23,14 @@ namespace UrlShortener
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+            }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                var context = services.GetRequiredService<UrlShortenerContext>();
+                context.Database.EnsureCreated();
             }
 
             app.UseHttpsRedirection();
