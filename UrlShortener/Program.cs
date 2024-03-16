@@ -1,4 +1,5 @@
-using Domain;
+using Domain.Data;
+using Domain.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace UrlShortener
@@ -11,6 +12,8 @@ namespace UrlShortener
 
             var localDbConnectionString = builder.Configuration.GetConnectionString("UrlShortenerContext");
             builder.Services.AddDbContext<UrlShortenerContext>(options => options.UseSqlServer(localDbConnectionString));
+
+            builder.Services.AddScoped<IRepository<ShortUri>, ShortUriRepository>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

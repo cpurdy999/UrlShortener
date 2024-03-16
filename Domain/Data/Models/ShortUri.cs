@@ -1,8 +1,8 @@
 ﻿namespace Domain.Data.Models
 {
-    public class UriEntry
+    public class ShortUri
     {
-        public UriEntry(string accessTag, Uri destination)
+        public ShortUri(string accessTag, Uri destination)
         {
             AccessTag = accessTag;
             Destination = destination;

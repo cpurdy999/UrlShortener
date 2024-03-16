@@ -1,7 +1,7 @@
 ﻿using Domain.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Domain
+namespace Domain.Data
 {
     public class UrlShortenerContext : DbContext
     {
@@ -10,6 +10,6 @@ namespace Domain
         {
         }
 
-        public DbSet<UriEntry> UriEntries { get; set; }
+        public DbSet<ShortUri> ShortUris { get; set; }
     }
 }
