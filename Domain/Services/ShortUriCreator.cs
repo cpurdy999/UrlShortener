@@ -29,8 +29,11 @@ namespace Domain.Services
         public ShortUri Create(string input)
         {
             var result = new ShortUri(CreateAccessTag(), input);
+
+            //TODO: Handle access tag collisions
             _repository.Add(result);
             _repository.SaveChanges();
+
             return result;
         }
 

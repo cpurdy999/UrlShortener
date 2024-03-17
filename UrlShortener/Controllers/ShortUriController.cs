@@ -28,7 +28,7 @@ namespace UrlShortener.Controllers
                 return Redirect(shortUri.Destination);
             }
 
-            throw new NotImplementedException();
+            return View();
         }
 
         public IActionResult Create(ShortUriCreationRequest request)

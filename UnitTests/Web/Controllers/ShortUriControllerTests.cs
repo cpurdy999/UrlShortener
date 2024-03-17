@@ -36,6 +36,31 @@ namespace UnitTests.Web.Controllers
         }
 
         [Test]
+        public void Index_WithNonExistentAccessTag_ReturnsAView()
+        {
+            string existingAccessTag = "AAAA";
+            string existingUriResult = "https://example.com";
+
+            string nonExistentAccessTag = "BBBB";
+
+            var shortUriCreatorService = Substitute.For<IShortUriCreator>();
+            var repository = Substitute.For<IRepository<ShortUri>>();
+
+            var dbList = new List<ShortUri>
+            {
+                new ShortUri(existingAccessTag, existingUriResult)
+            };
+
+            repository.Items.ReturnsForAnyArgs(dbList.AsQueryable());
+
+            var controller = new ShortUriController(Substitute.For<ILogger<ShortUriController>>(), repository, shortUriCreatorService);
+
+            var result = controller.Index(accessTag: nonExistentAccessTag);
+
+            Assert.That(result, Is.InstanceOf<ViewResult>());
+        }
+
+        [Test]
         public void Create_WithValidInput_CreatesANewShortUri()
         {
             var shortUriCreatorService = Substitute.For<IShortUriCreator>();
