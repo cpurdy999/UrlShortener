@@ -2,6 +2,6 @@
 {
     public class ShortUriCreationRequest
     {
-        public Uri Uri { get; set; }
+        public string Uri { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace UnitTests.Domain.Services
         [Test]
         public void Create_ReturnsAShortUri_With_CorrectData()
         {
-            var inputUri = new Uri("https://example.com");
+            var inputUri = "https://example.com";
 
             var result = shorUriCreator.Create(inputUri);
 
@@ -30,7 +30,7 @@ namespace UnitTests.Domain.Services
         [Test]
         public void Create_ReturnsAShortUri_With_8CharactersInAccessTag()
         {
-            var inputUri = new Uri("https://example.com");
+            var inputUri = "https://example.com";
 
             var result = shorUriCreator.Create(inputUri);
 
@@ -43,7 +43,7 @@ namespace UnitTests.Domain.Services
             var repository = Substitute.For<IRepository<ShortUri>>();
             var localShortUriCreator = new ShortUriCreator(repository, new Random());
 
-            var inputUri = new Uri("https://example.com");
+            var inputUri = "https://example.com";
 
             var result = localShortUriCreator.Create(inputUri);
 

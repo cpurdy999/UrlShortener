@@ -2,7 +2,7 @@
 {
     public class ShortUri
     {
-        public ShortUri(string accessTag, Uri destination)
+        public ShortUri(string accessTag, string destination)
         {
             ID = Guid.NewGuid();
 
@@ -12,6 +12,6 @@
 
         public Guid ID { get; set; }
         public string AccessTag { get; set; }
-        public Uri Destination { get; set; }
+        public string Destination { get; set; }
     }
 }

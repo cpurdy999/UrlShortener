@@ -26,7 +26,7 @@ namespace Domain.Services
             _random = random;
         }
 
-        public ShortUri Create(Uri input)
+        public ShortUri Create(string input)
         {
             var result = new ShortUri(CreateAccessTag(), input);
             _repository.Add(result);

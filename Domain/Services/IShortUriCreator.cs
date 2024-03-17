@@ -4,6 +4,6 @@ namespace Domain.Services
 {
     public interface IShortUriCreator
     {
-        public ShortUri Create(Uri input);
+        public ShortUri Create(string input);
     }
 }
