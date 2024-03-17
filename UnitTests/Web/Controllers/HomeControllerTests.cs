@@ -3,15 +3,10 @@ using Microsoft.Extensions.Logging;
 using NSubstitute;
 using UrlShortener.Controllers;
 
-namespace UnitTests
+namespace UnitTests.Web.Controllers
 {
     public class HomeControllerTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void Index_Returns_a_ViewResult()
         {

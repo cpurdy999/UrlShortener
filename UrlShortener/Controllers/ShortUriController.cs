@@ -1,5 +1,6 @@
 using Domain.Data;
 using Domain.Data.Models;
+using Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using UrlShortener.Models;
 
@@ -8,18 +9,17 @@ namespace UrlShortener.Controllers
     public class ShortUriController : Controller
     {
         private readonly ILogger<ShortUriController> _logger;
-        private readonly IRepository<ShortUri> _repository;
+        private IShortUriCreator _shortUriCreator;
 
-        public ShortUriController(ILogger<ShortUriController> logger, IRepository<ShortUri> repository)
+        public ShortUriController(ILogger<ShortUriController> logger, IShortUriCreator shortUriCreator)
         {
             _logger = logger;
-            _repository = repository;
+            _shortUriCreator = shortUriCreator;
         }
 
         public IActionResult Create(ShortUriCreationRequest request)
         {
-            _repository.Add(new ShortUri("", request.Uri));
-
+            _shortUriCreator.Create(request.Uri);
             return View();
         }
     }

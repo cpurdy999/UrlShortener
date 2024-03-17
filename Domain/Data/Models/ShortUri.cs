@@ -4,6 +4,8 @@
     {
         public ShortUri(string accessTag, Uri destination)
         {
+            ID = Guid.NewGuid();
+
             AccessTag = accessTag;
             Destination = destination;
         }
