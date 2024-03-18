@@ -1,6 +1,7 @@
 using Domain.Data;
 using Domain.Data.Models;
 using Domain.Services;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace UrlShortener
@@ -47,8 +48,13 @@ namespace UrlShortener
             app.UseAuthorization();
 
             app.MapControllerRoute(
+                name: "AccessTag",
+                pattern: "{accessTag}",
+                new { controller = "ShortUri", action = "Index" });
+
+            app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=ShortUri}/{action=Create}");
 
             app.Run();
         }

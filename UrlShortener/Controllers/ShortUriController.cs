@@ -46,6 +46,8 @@ namespace UrlShortener.Controllers
 
         public IActionResult Success(string accessTag)
         {
+            var action = Url.Action("ShortUri", "Index", new { accessTag });
+
             var link = Url.ActionLink(nameof(Index), values: new Dictionary<string, string>{ { nameof(accessTag), accessTag } });
             ViewBag.CreatedLink = link;
             return View();
