@@ -17,6 +17,7 @@ namespace UnitTests.Domain.Services
         }
 
         [Test]
+        [Repeat(25)]
         public void Create_ReturnsAShortUri_With_CorrectData()
         {
             var inputUri = "https://example.com";

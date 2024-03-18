@@ -43,7 +43,7 @@ namespace Domain.Services
 
             for (int x = 0; x < 8; x++)
             {
-                stringBuilder.Append(tagCharacters[_random.Next(63)]);
+                stringBuilder.Append(tagCharacters[_random.Next(62)]);
             }
 
             return stringBuilder.ToString();
