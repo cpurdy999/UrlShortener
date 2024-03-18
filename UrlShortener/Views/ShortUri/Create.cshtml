@@ -1,0 +1,20 @@
+﻿@model ShortUriCreationRequest
+
+@{
+    ViewData["Title"] = "Missing page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Request a shortened URL</h1>
+    <div class="spaced">
+        @using (Html.BeginForm())
+        {
+            <div>
+                @Html.LabelFor(model => model.Uri, "Enter the URL you wish to shorten here: ")
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.Uri, new { size = 100 })
+            </div>
+        }
+    </div>
+</div>

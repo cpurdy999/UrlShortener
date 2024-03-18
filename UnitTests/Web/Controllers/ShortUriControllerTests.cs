@@ -64,13 +64,29 @@ namespace UnitTests.Web.Controllers
 
             var controller = new ShortUriController(Substitute.For<ILogger<ShortUriController>>(), repository, shortUriCreatorService);
 
-            var result = controller.Index(accessTag: nonExistentAccessTag);
+            var result = controller.Index(accessTag: nonExistentAccessTag) as ViewResult;
 
-            Assert.That(result, Is.InstanceOf<ViewResult>());
+            Assert.That(result, Is.Not.Null);
         }
 
         [Test]
-        public void Create_WithValidInput_CreatesANewShortUri()
+        public void Create_Get_ReturnsAView_WithANewCreationRequestModel()
+        {
+            var repository = Substitute.For<IRepository<ShortUri>>();
+            var controller = new ShortUriController(Substitute.For<ILogger<ShortUriController>>(), repository, defaultShortUriCreator);
+
+            var result = controller.Create() as ViewResult;
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Model, Is.InstanceOf<ShortUriCreationRequest>());
+
+            var model = result.Model as ShortUriCreationRequest;
+
+            Assert.That(model.Uri, Is.Null);
+        }
+
+        [Test]
+        public void Create_Post_WithValidInput_CreatesANewShortUri()
         {
             var repository = Substitute.For<IRepository<ShortUri>>();
             var controller = new ShortUriController(Substitute.For<ILogger<ShortUriController>>(), repository, defaultShortUriCreator);
@@ -82,7 +98,7 @@ namespace UnitTests.Web.Controllers
         }
 
         [Test]
-        public void Create_WithValidInput_Redirects_To_Success_Page()
+        public void Create_Post_WithValidInput_Redirects_To_Success_Page()
         {
             var repository = Substitute.For<IRepository<ShortUri>>();
             var shortUriCreatorService = Substitute.For<IShortUriCreator>();
@@ -112,9 +128,9 @@ namespace UnitTests.Web.Controllers
 
             var controller = new ShortUriController(Substitute.For<ILogger<ShortUriController>>(), repository, shortUriCreatorService);
 
-            var result = controller.Success(accessTag: "AAAAAA");
+            var result = controller.Success(accessTag: "AAAAAA") as ViewResult;
 
-            Assert.That(result, Is.InstanceOf<ViewResult>());
+            Assert.That(result, Is.Not.Null);
         }
 
         [Test]

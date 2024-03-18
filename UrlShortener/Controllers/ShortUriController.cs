@@ -31,6 +31,13 @@ namespace UrlShortener.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View(new ShortUriCreationRequest());
+        }
+
+        [HttpPost]
         public IActionResult Create(ShortUriCreationRequest request)
         {
             var result = _shortUriCreator.Create(request.Uri);
