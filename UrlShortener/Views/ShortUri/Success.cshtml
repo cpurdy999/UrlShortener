@@ -1,0 +1,10 @@
+﻿@using UrlShortener.Controllers;
+
+@{
+    ViewData["Title"] = "Successfully created shortened URL";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Shortened URL successfully created!</h1>
+    <p class="spaced">Your shortened URL is: <a href="@ViewBag.CreatedLink">@ViewBag.CreatedLink</a></p>
+</div>

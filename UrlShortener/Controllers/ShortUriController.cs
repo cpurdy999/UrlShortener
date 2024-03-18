@@ -33,7 +33,14 @@ namespace UrlShortener.Controllers
 
         public IActionResult Create(ShortUriCreationRequest request)
         {
-            _shortUriCreator.Create(request.Uri);
+            var result = _shortUriCreator.Create(request.Uri);
+            return RedirectToAction(nameof(Success), new { accessTag = result.AccessTag });
+        }
+
+        public IActionResult Success(string accessTag)
+        {
+            var link = Url.ActionLink(nameof(Index), values: new Dictionary<string, string>{ { nameof(accessTag), accessTag } });
+            ViewBag.CreatedLink = link;
             return View();
         }
     }
